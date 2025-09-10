@@ -1,0 +1,12 @@
+{
+  "name": "battery-passport-system",
+  "version": "1.0.0",
+  "description": "Microservices ecosystem for managing digital battery passports",
+  "scripts": {
+    "dev:auth": "cd auth-service && npm run dev",
+    "install:auth": "cd auth-service && npm install"
+  },
+  "keywords": ["microservices", "battery-passport", "nodejs", "mongodb"],
+  "author": "",
+  "license": "ISC"
+}
