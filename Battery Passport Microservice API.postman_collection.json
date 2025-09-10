@@ -1,0 +1,748 @@
+{
+	"info": {
+		"_postman_id": "90c8a6d8-1909-4fbd-b6bc-24396e961c09",
+		"name": "Battery Passport Microservice API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29495626",
+		"_collection_link": "https://platform-api-3143.postman.co/workspace/Platform-api-Workspace~d73c3625-aecf-4aad-8b0d-73c5c84726bb/collection/29495626-90c8a6d8-1909-4fbd-b6bc-24396e961c09?action=share&source=collection_link&creator=29495626"
+	},
+	"item": [
+		{
+			"name": "Auth Service",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"jasjeev99@gmail.com\",\r\n    \"password\":\"jasjeev@123\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"jasjeev99@gmail.com\",\r\n    \"password\":\"jasjeev@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/auth/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/auth/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Passport Service",
+			"item": [
+				{
+					"name": "Create Passport",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": {\r\n    \"generalInformation\": {\r\n      \"batteryIdentifier\": \"BAT123456789\",\r\n      \"batteryModel\": {\r\n        \"id\": \"MOD-001\",\r\n        \"modelName\": \"Li-Ion 5000mAh\"\r\n      },\r\n      \"batteryMass\": 3.2,\r\n      \"batteryCategory\": \"EV\",\r\n      \"batteryStatus\": \"Original\",\r\n      \"manufacturingDate\": \"2023-05-15T00:00:00.000Z\",\r\n      \"manufacturingPlace\": \"Berlin, Germany\",\r\n      \"warrantyPeriod\": \"5 years\",\r\n      \"manufacturerInformation\": {\r\n        \"manufacturerName\": \"GreenCell Industries\",\r\n        \"manufacturerIdentifier\": \"GC-IND-2023\"\r\n      }\r\n    },\r\n    \"materialComposition\": {\r\n      \"batteryChemistry\": \"Lithium-ion\",\r\n      \"criticalRawMaterials\": [\r\n        \"Cobalt\",\r\n        \"Lithium\",\r\n        \"Nickel\"\r\n      ],\r\n      \"hazardousSubstances\": [\r\n        {\r\n          \"substanceName\": \"Cobalt Oxide\",\r\n          \"chemicalFormula\": \"CoO\",\r\n          \"casNumber\": \"1307-96-6\"\r\n        },\r\n        {\r\n          \"substanceName\": \"Nickel Sulfate\",\r\n          \"chemicalFormula\": \"NiSO4\",\r\n          \"casNumber\": \"7786-81-4\"\r\n        }\r\n      ]\r\n    },\r\n    \"carbonFootprint\": {\r\n      \"totalCarbonFootprint\": 12.5,\r\n      \"measurementUnit\": \"kg CO2e\",\r\n      \"methodology\": \"ISO 14067\"\r\n    }\r\n  },\r\n  \"createdBy\": \"6512bd43d9caa6e02c990b0a\",  // Example ObjectId\r\n  \"createdAt\": \"2025-09-10T10:00:00.000Z\",\r\n  \"updatedAt\": \"2025-09-10T10:00:00.000Z\",\r\n  \"isActive\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/api/passports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"passports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Passports",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3002/api/passports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"passports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specifc Passport",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3002/api/passports/68c19b64e80bd07c1a9b56d1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"passports",
+								"68c19b64e80bd07c1a9b56d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Passport",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/api/passports/68c19b64e80bd07c1a9b56d1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"passports",
+								"68c19b64e80bd07c1a9b56d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Passport",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3002/api/passports/68c19b64e80bd07c1a9b56d1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"passports",
+								"68c19b64e80bd07c1a9b56d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3002/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Document Service",
+			"item": [
+				{
+					"name": "Upload File",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/jasje/Downloads/eCertificate.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/documents/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"documents",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Document",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/documents/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"documents",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doc MetaData",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/documents/a6adb6a4-8609-4928-840e-dc1280ee2fd6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"documents",
+								"a6adb6a4-8609-4928-840e-dc1280ee2fd6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doc Download URL",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/documents/a6adb6a4-8609-4928-840e-dc1280ee2fd6/download",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"documents",
+								"a6adb6a4-8609-4928-840e-dc1280ee2fd6",
+								"download"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doc MetaData",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/documents/a6adb6a4-8609-4928-840e-dc1280ee2fd6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"documents",
+								"a6adb6a4-8609-4928-840e-dc1280ee2fd6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Doc",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/documents/a6adb6a4-8609-4928-840e-dc1280ee2fd6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"documents",
+								"a6adb6a4-8609-4928-840e-dc1280ee2fd6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification Service",
+			"item": [
+				{
+					"name": "Create Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"email\",\r\n  \"eventType\": \"user.registered\",\r\n  \"title\": \"Welcome to Our Platform!\",\r\n  \"message\": \"Your account has been successfully created.\",\r\n  \"recipient\": \"64f1b7c5a2f96a001fa4cdef\",\r\n  \"recipientEmail\": \"user@example.com\",\r\n  \"status\": \"pending\",\r\n  \"priority\": \"medium\",\r\n  \"metadata\": {\r\n    \"ipAddress\": \"192.168.1.1\",\r\n    \"userAgent\": \"Mozilla/5.0\"\r\n  },\r\n  \"sentAt\": null,\r\n  \"readAt\": null,\r\n  \"retryCount\": 0,\r\n  \"maxRetries\": 3,\r\n  \"isActive\": true,\r\n  \"createdAt\": \"2025-09-11T10:00:00.000Z\",\r\n  \"updatedAt\": \"2025-09-11T10:00:00.000Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3004/api/notifications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"api",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notification",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3004/api/notifications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"api",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notification Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3004/api/notifications/stats",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"api",
+								"notifications",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Notification",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3004/api/notifications/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"api",
+								"notifications",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Read Notification",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3004/api/notifications/:id/read",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"api",
+								"notifications",
+								":id",
+								"read"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Notification",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3004/api/notifications/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"api",
+								"notifications",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMxOGJjMWUwNGJiNzg1NTYxOTAyNzgiLCJlbWFpbCI6Imphc2plZXY5OUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MTQ4NDIsImV4cCI6MTc1NzYwMTI0Mn0.IzjXVC_apRpB9qoHdESojhrDwPA6fLCr6vf41iUkX18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3004/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
