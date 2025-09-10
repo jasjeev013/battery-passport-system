@@ -1,0 +1,14 @@
+Notification Log - 9/11/2025, 1:20:09 AM
+----------------------------------------------
+Event Type: user.registered
+Type: email
+Title: Welcome to Our Platform!
+Message: Your account has been successfully created.
+Recipient: user@example.com
+Status: logged_to_file
+Priority: medium
+Metadata: {
+  "ipAddress": "192.168.1.1",
+  "userAgent": "Mozilla/5.0"
+}
+----------------------------------------------
