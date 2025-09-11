@@ -1,0 +1,98 @@
+services:
+  # Auth Service
+  - type: web
+    name: auth-service
+    env: node
+    buildCommand: cd auth-service && npm install
+    startCommand: cd auth-service && npm start
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: MONGODB_URI
+        fromSecret: MONGODB_URI
+      - key: JWT_SECRET
+        fromSecret: JWT_SECRET
+      - key: JWT_EXPIRES_IN
+        value: 24h
+      - key: NODE_ENV
+        value: production
+
+  # Battery Passport Service
+  - type: web
+    name: battery-passport-service
+    env: node
+    buildCommand: cd battery-passport-service && npm install
+    startCommand: cd battery-passport-service && npm start
+    envVars:
+      - key: PORT
+        value: 3002
+      - key: MONGODB_URI
+        fromSecret: MONGODB_URI
+      - key: AUTH_SERVICE_URL
+        value: https://auth-service.onrender.com
+      - key: JWT_SECRET
+        fromSecret: JWT_SECRET
+      - key: KAFKA_BROKERS
+        fromSecret: KAFKA_BROKERS
+      - key: NODE_ENV
+        value: production
+
+  # Document Service
+  - type: web
+    name: document-service
+    env: node
+    buildCommand: cd document-service && npm install
+    startCommand: cd document-service && npm start
+    envVars:
+      - key: PORT
+        value: 3003
+      - key: MONGODB_URI
+        fromSecret: MONGODB_URI
+      - key: AUTH_SERVICE_URL
+        value: https://auth-service.onrender.com
+      - key: JWT_SECRET
+        fromSecret: JWT_SECRET
+      - key: AWS_ACCESS_KEY_ID
+        fromSecret: AWS_ACCESS_KEY_ID
+      - key: AWS_SECRET_ACCESS_KEY
+        fromSecret: AWS_SECRET_ACCESS_KEY
+      - key: AWS_REGION
+        value: us-east-1
+      - key: S3_BUCKET_NAME
+        fromSecret: S3_BUCKET_NAME
+      - key: NODE_ENV
+        value: production
+
+  # Notification Service
+  - type: web
+    name: notification-service
+    env: node
+    buildCommand: cd notification-service && npm install
+    startCommand: cd notification-service && npm start
+    envVars:
+      - key: PORT
+        value: 3004
+      - key: MONGODB_URI
+        fromSecret: MONGODB_URI
+      - key: AUTH_SERVICE_URL
+        value: https://auth-service.onrender.com
+      - key: JWT_SECRET
+        fromSecret: JWT_SECRET
+      - key: KAFKA_BROKERS
+        fromSecret: KAFKA_BROKERS
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_USER
+        fromSecret: SMTP_USER
+      - key: SMTP_PASS
+        fromSecret: SMTP_PASS
+      - key: FROM_EMAIL
+        value: noreply@batterypassport.com
+      - key: FROM_NAME
+        value: Battery Passport System
+      - key: ENABLE_EMAIL_NOTIFICATIONS
+        value: true
+      - key: NODE_ENV
+        value: production

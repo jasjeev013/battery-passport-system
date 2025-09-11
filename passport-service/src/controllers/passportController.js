@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const BatteryPassport = require('../models/BatteryPassport');
+const { sendEvent } = require('../config/kafka');
 
 // Create a new battery passport
 const createPassport = async (req, res) => {
@@ -18,8 +19,8 @@ const createPassport = async (req, res) => {
     });
 
     if (existingPassport) {
-      return res.status(400).json({ 
-        message: 'Battery passport with this identifier already exists' 
+      return res.status(400).json({
+        message: 'Battery passport with this identifier already exists'
       });
     }
 
@@ -30,6 +31,15 @@ const createPassport = async (req, res) => {
     });
 
     await passport.save();
+
+    await sendEvent('passport.created', {
+      passportId: passport._id,
+      batteryIdentifier: passport.data.generalInformation.batteryIdentifier,
+      modelName: passport.data.generalInformation.batteryModel.modelName,
+      manufacturerName: passport.data.generalInformation.manufacturerInformation.manufacturerName,
+      createdBy: req.user.userId,
+      createdAt: new Date().toISOString()
+    });
 
     res.status(201).json({
       message: 'Battery passport created successfully',
@@ -54,8 +64,8 @@ const getPassport = async (req, res) => {
 
     // Check if user has access (admin or owner)
     if (req.user.role !== 'admin' && passport.createdBy._id.toString() !== req.user.userId) {
-      return res.status(403).json({ 
-        message: 'Access denied. You can only view your own passports.' 
+      return res.status(403).json({
+        message: 'Access denied. You can only view your own passports.'
       });
     }
 
@@ -73,7 +83,7 @@ const getPassport = async (req, res) => {
 const getAllPassports = async (req, res) => {
   try {
     let query = { isActive: true };
-    
+
     // If user is not admin, only show their own passports
     if (req.user.role !== 'admin') {
       query.createdBy = req.user.userId;
@@ -114,20 +124,28 @@ const updatePassport = async (req, res) => {
 
     // Check if user is admin or the creator
     if (req.user.role !== 'admin' && passport.createdBy.toString() !== req.user.userId) {
-      return res.status(403).json({ 
-        message: 'Access denied. You can only update your own passports.' 
+      return res.status(403).json({
+        message: 'Access denied. You can only update your own passports.'
       });
     }
 
     // Update passport
     const updatedPassport = await BatteryPassport.findByIdAndUpdate(
       id,
-      { 
+      {
         $set: updateData,
         updatedAt: Date.now()
       },
       { new: true, runValidators: true }
     ).populate('createdBy', 'email role');
+
+    await sendEvent('passport.updated', {
+      passportId: updatedPassport._id,
+      batteryIdentifier: updatedPassport.data.generalInformation.batteryIdentifier,
+      updatedBy: req.user.userId,
+      updatedAt: new Date().toISOString(),
+      updatedFields: Object.keys(updateData)
+    });
 
     res.json({
       message: 'Battery passport updated successfully',
@@ -152,19 +170,26 @@ const deletePassport = async (req, res) => {
 
     // Check if user is admin
     if (req.user.role !== 'admin') {
-      return res.status(403).json({ 
-        message: 'Access denied. Only admin can delete passports.' 
+      return res.status(403).json({
+        message: 'Access denied. Only admin can delete passports.'
       });
     }
 
     // Soft delete by setting isActive to false
     await BatteryPassport.findByIdAndUpdate(
       id,
-      { 
+      {
         isActive: false,
         updatedAt: Date.now()
       }
     );
+
+    await sendEvent('passport.deleted', {
+      passportId: id,
+      batteryIdentifier: passport.data.generalInformation.batteryIdentifier,
+      deletedBy: req.user.userId,
+      deletedAt: new Date().toISOString()
+    });
 
     res.json({
       message: 'Battery passport deleted successfully'

@@ -1,0 +1,135 @@
+version: '3.8'
+
+services:
+  # Zookeeper (required for Kafka)
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    ports:
+      - "2181:2181"
+    networks:
+      - battery-network
+
+  # Kafka
+  kafka:
+    build: ./kafka
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_HOST://:29092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    depends_on:
+      - zookeeper
+    networks:
+      - battery-network
+
+  # MongoDB
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_DATABASE=battery_passport
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - battery-network
+
+  # Auth Service
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGODB_URI=mongodb://mongodb:27017/battery_passport
+      - JWT_SECRET=your_super_secret_jwt_key_here
+      - JWT_EXPIRES_IN=24h
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+    networks:
+      - battery-network
+    restart: unless-stopped
+
+  # Battery Passport Service
+  battery-passport-service:
+    build: ./battery-passport-service
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGODB_URI=mongodb://mongodb:27017/battery_passport
+      - AUTH_SERVICE_URL=http://auth-service:3001
+      - JWT_SECRET=your_super_secret_jwt_key_here
+      - KAFKA_BROKERS=kafka:9092
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+      - auth-service
+      - kafka
+    networks:
+      - battery-network
+    restart: unless-stopped
+
+  # Document Service
+  document-service:
+    build: ./document-service
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - MONGODB_URI=mongodb://mongodb:27017/battery_passport
+      - AUTH_SERVICE_URL=http://auth-service:3001
+      - JWT_SECRET=your_super_secret_jwt_key_here
+      - AWS_ACCESS_KEY_ID=your_aws_access_key_id
+      - AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
+      - AWS_REGION=your_aws_region
+      - S3_BUCKET_NAME=your_s3_bucket_name
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+      - auth-service
+    networks:
+      - battery-network
+    restart: unless-stopped
+
+  # Notification Service
+  notification-service:
+    build: ./notification-service
+    ports:
+      - "3004:3004"
+    environment:
+      - PORT=3004
+      - MONGODB_URI=mongodb://mongodb:27017/battery_passport
+      - AUTH_SERVICE_URL=http://auth-service:3001
+      - JWT_SECRET=your_super_secret_jwt_key_here
+      - KAFKA_BROKERS=kafka:9092
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=your_email@gmail.com
+      - SMTP_PASS=your_app_password
+      - FROM_EMAIL=noreply@batterypassport.com
+      - FROM_NAME=Battery Passport System
+      - ENABLE_EMAIL_NOTIFICATIONS=true
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+      - auth-service
+      - kafka
+    networks:
+      - battery-network
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+
+networks:
+  battery-network:
+    driver: bridge
