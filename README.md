@@ -364,7 +364,7 @@ Make sure the `S3_BUCKET` exists (the Compose file or init script can create it)
 
 ---
 
-# Bonus / Extras (suggested improvements)
+# Bonus / Extras (upcoming improvements)
 
 * Add Swagger / OpenAPI for each service for interactive API docs.
 * Centralized logging with Winston + log shipping (ELK / Loki).
@@ -377,11 +377,10 @@ Make sure the `S3_BUCKET` exists (the Compose file or init script can create it)
 
 # License
 
-MIT — adapt as you like. Please add a `LICENSE` file if required.
+MIT — adapt as you like.
 
 ---
 
 # Contributors
 
 * Original author: `jasjeev` (project owner)
-* Helpers: (you can list other contributors / PRs here)
